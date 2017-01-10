@@ -14,7 +14,15 @@ public class LoginInfo {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "login_info_id_seq")
     @Column(name = "id", updatable = false)
     private Long id;
+
+    /**
+     * Логин учетной записи для входа
+     */
     private String login;
+
+    /**
+     * Пароль учетной записи для входа
+     */
     private String password;
 
     public LoginInfo() {

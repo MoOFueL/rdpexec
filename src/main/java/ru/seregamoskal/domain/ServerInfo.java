@@ -1,6 +1,11 @@
 package ru.seregamoskal.domain;
 
+import org.springframework.util.CollectionUtils;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Dmitriy
@@ -15,6 +20,9 @@ public class ServerInfo {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    /**
+     * Имя сервера(опционально)
+     */
     private String name;
 
     /**
@@ -33,6 +41,14 @@ public class ServerInfo {
      * Признак доступности(работает или нет)
      */
     private boolean working;
+
+    @Column(name = "date_of_last_access")
+    private Date dateOfLastAccess;
+
+    @OneToMany
+    @JoinColumn(name = "lastOperation")
+    @OrderBy("date")
+    private Set<Operation> operations;
 
     public Long getId() {
         return id;
@@ -74,6 +90,25 @@ public class ServerInfo {
         this.working = working;
     }
 
+    public Date getDateOfLastAccess() {
+        return dateOfLastAccess;
+    }
+
+    public void setDateOfLastAccess(Date dateOfLastAccess) {
+        this.dateOfLastAccess = dateOfLastAccess;
+    }
+
+    public Set<Operation> getOperations() {
+        if (CollectionUtils.isEmpty(operations)) {
+            operations = new HashSet<>();
+        }
+        return operations;
+    }
+
+    public void setOperations(Set<Operation> operations) {
+        this.operations = operations;
+    }
+
     @Override
     public String toString() {
         return "ServerInfo{" +
@@ -82,6 +117,7 @@ public class ServerInfo {
                 ", address='" + address + '\'' +
                 ", loginInfo=" + loginInfo +
                 ", working=" + working +
+                ", dateOfLastAccess=" + dateOfLastAccess +
                 '}';
     }
 }
