@@ -21,16 +21,16 @@ import java.util.List;
 @Service
 public class CsvUtils {
 
+    private Logger LOGGER = LoggerFactory.getLogger(LoginInfoService.class);
+
     private static final String[] FILE_HEADER_MAPPING = {"login", "password"};
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
 
-    private Logger LOGGER = LoggerFactory.getLogger(LoginInfoService.class);
-
     public List<LoginInfo> parseCsvToLoginInfo(MultipartFile multipartFile) throws IOException {
 
         LOGGER.info("Starting parsing CSV file with login-password pairs");
-        final List<LoginInfo> result = new ArrayList<>(500);
+        final List<LoginInfo> result = new ArrayList<>(100);
         final CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
         final Reader reader = new InputStreamReader(multipartFile.getInputStream());
         final CSVParser parser = new CSVParser(reader, csvFileFormat);
