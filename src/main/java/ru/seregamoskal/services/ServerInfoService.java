@@ -32,6 +32,15 @@ public class ServerInfoService {
         return serverInfoRepository.findByName(serverName);
     }
 
+    /**
+     * Метод для получения всех работающих и доступных серверов
+     *
+     * @return список работающих, доступных серверов
+     */
+    public List<ServerInfo> findWorkingServers() {
+        return serverInfoRepository.findByLoginInfoIsNotNull();
+    }
+
     public List<ServerInfo> save(Iterable<ServerInfo> iterable) {
         return serverInfoRepository.save(iterable);
     }

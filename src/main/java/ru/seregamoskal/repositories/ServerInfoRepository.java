@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface ServerInfoRepository extends AbstractRepository<ServerInfo>{
     List<ServerInfo> findByName(String serverName);
+
+    List<ServerInfo> findByLoginInfoIsNotNull();
 }
