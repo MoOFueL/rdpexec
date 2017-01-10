@@ -47,7 +47,7 @@ public class ServerInfo {
 
     @OneToMany
     @JoinColumn(name = "id")
-    @OrderBy("date")
+    @OrderBy("date DESC")
     private Set<Operation> operations;
 
     public Long getId() {
