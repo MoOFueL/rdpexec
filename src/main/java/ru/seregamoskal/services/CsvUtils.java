@@ -31,7 +31,7 @@ public class CsvUtils {
 
         LOGGER.info("Starting parsing CSV file with login-password pairs");
         final List<LoginInfo> result = new ArrayList<>(100);
-        final CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
+        final CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING).withIgnoreHeaderCase();
         final Reader reader = new InputStreamReader(multipartFile.getInputStream());
         final CSVParser parser = new CSVParser(reader, csvFileFormat);
         final List<CSVRecord> records = parser.getRecords();
