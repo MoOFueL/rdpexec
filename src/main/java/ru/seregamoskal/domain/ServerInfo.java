@@ -46,7 +46,7 @@ public class ServerInfo {
     private Date dateOfLastAccess;
 
     @OneToMany
-    @JoinColumn(name = "lastOperation")
+    @JoinColumn(name = "id")
     @OrderBy("date")
     private Set<Operation> operations;
 
