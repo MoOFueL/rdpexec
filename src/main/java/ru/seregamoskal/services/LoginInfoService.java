@@ -34,8 +34,9 @@ public class LoginInfoService {
         this.loginInfoRepository = loginInfoRepository;
     }
 
-    public void parseFromCsv(MultipartFile multipartFile) throws IOException {
-        final List<LoginInfo> parsedLoginInfos = csvService.parseCsvToLoginInfoList(multipartFile);
+    public void parseFromCsv(MultipartFile logins) throws IOException {
+        final List<LoginInfo> parsedLoginInfos = csvService.parseCsvToLoginInfoList(logins);
+        loginInfoRepository.deleteAllNative();
         loginInfoRepository.save(parsedLoginInfos);
     }
 

@@ -44,7 +44,7 @@ public class CsvService {
         final CSVParser parser = new CSVParser(reader, csvFileFormat);
         final List<CSVRecord> records = parser.getRecords();
         records.forEach(record -> result.add(new LoginInfo(record.get(LOGIN), record.get(PASSWORD))));
-        LOGGER.info("Finished parsing CSV file. Number of lines is: " + records.size());
+        LOGGER.info("Finished parsing CSV file. Number of records is: " + records.size());
 
         return result;
     }

@@ -30,8 +30,8 @@ public class LoginInfoController {
 
     @PostMapping(path = "/uploadCsv")
     @ResponseStatus(code = HttpStatus.OK)
-    public void uploadFromCsv(MultipartFile multipartFile) throws IOException {
-        loginInfoService.parseFromCsv(multipartFile);
+    public void uploadFromCsv(MultipartFile logins) throws IOException {
+        loginInfoService.parseFromCsv(logins);
     }
 
     @GetMapping
