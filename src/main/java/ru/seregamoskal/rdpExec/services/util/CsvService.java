@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.seregamoskal.rdpExec.domain.LoginInfo;
-import ru.seregamoskal.rdpExec.services.LoginInfoService;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,7 +21,7 @@ import java.util.List;
 @Service
 public class CsvService {
 
-    private Logger LOGGER = LoggerFactory.getLogger(LoginInfoService.class);
+    private Logger LOGGER = LoggerFactory.getLogger(CsvService.class);
 
     private static final String[] FILE_HEADER_MAPPING = {"login", "password"};
     private static final String LOGIN = "login";
