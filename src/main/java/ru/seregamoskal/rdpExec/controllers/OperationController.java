@@ -1,4 +1,4 @@
-package ru.seregamoskal.controllers;
+package ru.seregamoskal.rdpExec.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,8 +8,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.seregamoskal.domain.Operation;
-import ru.seregamoskal.services.OperationService;
+import ru.seregamoskal.rdpExec.domain.Operation;
+import ru.seregamoskal.rdpExec.services.OperationService;
 
 /**
  * Created by Дмитрий on 10.01.2017.

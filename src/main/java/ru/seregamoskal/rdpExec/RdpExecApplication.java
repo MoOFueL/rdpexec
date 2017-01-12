@@ -1,4 +1,4 @@
-package ru.seregamoskal;
+package ru.seregamoskal.rdpExec;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

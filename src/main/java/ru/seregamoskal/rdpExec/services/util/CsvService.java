@@ -1,4 +1,4 @@
-package ru.seregamoskal.services.util;
+package ru.seregamoskal.rdpExec.services.util;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.seregamoskal.domain.LoginInfo;
-import ru.seregamoskal.services.LoginInfoService;
+import ru.seregamoskal.rdpExec.domain.LoginInfo;
+import ru.seregamoskal.rdpExec.services.LoginInfoService;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

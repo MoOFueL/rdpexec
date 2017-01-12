@@ -1,10 +1,10 @@
-package ru.seregamoskal.repositories;
+package ru.seregamoskal.rdpExec.repositories;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.seregamoskal.domain.LoginInfo;
+import ru.seregamoskal.rdpExec.domain.LoginInfo;
 
 /**
  * @author Dmitriy

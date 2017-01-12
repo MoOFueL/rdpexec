@@ -1,4 +1,4 @@
-package ru.seregamoskal.domain;
+package ru.seregamoskal.rdpExec.domain;
 
 import org.springframework.util.CollectionUtils;
 

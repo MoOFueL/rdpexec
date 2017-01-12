@@ -1,7 +1,7 @@
-package ru.seregamoskal.repositories;
+package ru.seregamoskal.rdpExec.repositories;
 
 import org.springframework.stereotype.Repository;
-import ru.seregamoskal.domain.ServerInfo;
+import ru.seregamoskal.rdpExec.domain.ServerInfo;
 
 import java.util.List;
 

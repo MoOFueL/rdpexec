@@ -1,4 +1,4 @@
-package ru.seregamoskal.services;
+package ru.seregamoskal.rdpExec.services;
 
 import org.springframework.stereotype.Service;
 
@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
  * Created by Дмитрий on 11.01.2017.
  */
 @Service
-public class RDPService {
+public class TelNetService {
 }

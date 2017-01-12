@@ -1,4 +1,4 @@
-package ru.seregamoskal.repositories;
+package ru.seregamoskal.rdpExec.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

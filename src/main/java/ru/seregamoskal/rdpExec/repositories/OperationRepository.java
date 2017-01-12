@@ -1,7 +1,7 @@
-package ru.seregamoskal.repositories;
+package ru.seregamoskal.rdpExec.repositories;
 
 import org.springframework.stereotype.Repository;
-import ru.seregamoskal.domain.Operation;
+import ru.seregamoskal.rdpExec.domain.Operation;
 
 /**
  * Created by Дмитрий on 10.01.2017.
