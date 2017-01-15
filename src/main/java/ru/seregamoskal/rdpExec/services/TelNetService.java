@@ -8,10 +8,7 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Дмитрий on 11.01.2017.
@@ -21,6 +18,8 @@ public class TelNetService {
 
     private static final int PORT = 3389;
     private static final Logger LOGGER = LoggerFactory.getLogger(TelNetService.class);
+    private static final Map<String, Date> workingServersIpCache = new HashMap<>();
+    private static final long cacheTimeOfLife = 60 * 60 * 1000;
 
     /**
      * Метод ищет все доступные IP адреса серверов, доступных по RDP, из переданных подсетей
@@ -39,12 +38,23 @@ public class TelNetService {
         }
         LOGGER.info("Starting an internet address poll");
         for (String ipAddress : ipAddressSet) {
-            if (availableBySocket(ipAddress, PORT)) {
+            final Date ipAddressTimeOfLife = workingServersIpCache.get(ipAddress);
+            if (ipAddressTimeOfLife != null && checkTimeOfLife(ipAddressTimeOfLife)) {
                 result.add(ipAddress);
+            } else {
+                if (availableBySocket(ipAddress, PORT)) {
+                    workingServersIpCache.put(ipAddress, new Date());
+                    result.add(ipAddress);
+                }
             }
         }
+        workingServersIpCache.clear();
         LOGGER.info("Internet address poll finished");
         return result;
+    }
+
+    private boolean checkTimeOfLife(Date date) {
+        return new Date().getTime() - date.getTime() < cacheTimeOfLife;
     }
 
     /**
