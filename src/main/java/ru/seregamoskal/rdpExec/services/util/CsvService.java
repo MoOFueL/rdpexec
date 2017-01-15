@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class CsvService {
 
-    private Logger LOGGER = LoggerFactory.getLogger(CsvService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CsvService.class);
 
     private static final String LOGIN_HEADER = "login";
     private static final String PASSWORD_HEADER = "password";
