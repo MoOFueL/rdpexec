@@ -39,18 +39,26 @@ public class TelNetService {
         LOGGER.info("Starting an internet address poll");
         for (String ipAddress : ipAddressSet) {
             final Date ipAddressTimeOfLife = workingServersIpCache.get(ipAddress);
-            if (ipAddressTimeOfLife != null && checkTimeOfLife(ipAddressTimeOfLife)) {
-                result.add(ipAddress);
-            } else {
-                if (availableBySocket(ipAddress, PORT)) {
-                    workingServersIpCache.put(ipAddress, new Date());
+            if (ipAddressTimeOfLife != null) {
+                if (checkTimeOfLife(ipAddressTimeOfLife)) {
                     result.add(ipAddress);
+                } else {
+                    workingServersIpCache.remove(ipAddress);
+                    availableBySocket(result, ipAddress);
                 }
+            } else {
+                availableBySocket(result, ipAddress);
             }
         }
-        workingServersIpCache.clear();
         LOGGER.info("Internet address poll finished");
         return result;
+    }
+
+    private void availableBySocket(final Set<String> result, final String ipAddress) {
+        if (availableBySocket(ipAddress, PORT)) {
+            workingServersIpCache.put(ipAddress, new Date());
+            result.add(ipAddress);
+        }
     }
 
     private boolean checkTimeOfLife(Date date) {
