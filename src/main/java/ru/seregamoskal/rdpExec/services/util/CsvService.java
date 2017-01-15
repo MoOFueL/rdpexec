@@ -23,9 +23,9 @@ public class CsvService {
 
     private Logger LOGGER = LoggerFactory.getLogger(CsvService.class);
 
-    private static final String[] FILE_HEADER_MAPPING = {"login", "password"};
-    private static final String LOGIN = "login";
-    private static final String PASSWORD = "password";
+    private static final String LOGIN_HEADER = "login";
+    private static final String PASSWORD_HEADER = "password";
+    private static final String[] FILE_HEADER_MAPPING = {LOGIN_HEADER, PASSWORD_HEADER};
 
     /**
      * Метод принимает на вход {@link MultipartFile} CSV-файл и парсит его для создания списка объектов {@link LoginInfo}
@@ -42,7 +42,7 @@ public class CsvService {
         final Reader reader = new InputStreamReader(multipartFile.getInputStream());
         final CSVParser parser = new CSVParser(reader, csvFileFormat);
         final List<CSVRecord> records = parser.getRecords();
-        records.forEach(record -> result.add(new LoginInfo(record.get(LOGIN), record.get(PASSWORD))));
+        records.forEach(record -> result.add(new LoginInfo(record.get(LOGIN_HEADER), record.get(PASSWORD_HEADER))));
         LOGGER.info("Finished parsing CSV file. Number of records is: " + records.size());
 
         return result;

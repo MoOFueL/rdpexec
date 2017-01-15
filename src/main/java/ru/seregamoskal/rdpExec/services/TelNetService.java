@@ -11,11 +11,9 @@ import java.net.Socket;
 @Service
 public class TelNetService {
     private static boolean available(String ip, int port) {
-        try (Socket ignored = new Socket(ip ,port ))
-        {
+        try (Socket ignored = new Socket(ip, port)) {
             return false;
-        }
-        catch (IOException ignored) {
+        } catch (IOException ignored) {
             return true;
         }
     }
