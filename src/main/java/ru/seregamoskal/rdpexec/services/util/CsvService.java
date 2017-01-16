@@ -15,6 +15,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  * @author Dmitriy
  */
@@ -39,7 +41,7 @@ public class CsvService {
         LOGGER.info("Starting parsing CSV file with login-password pairs");
         final List<LoginInfo> result = new ArrayList<>(100);
         final CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING).withIgnoreHeaderCase();
-        final Reader reader = new InputStreamReader(multipartFile.getInputStream());
+        final Reader reader = new InputStreamReader(multipartFile.getInputStream(), UTF_8);
         final CSVParser parser = new CSVParser(reader, csvFileFormat);
         final List<CSVRecord> records = parser.getRecords();
         records.forEach(record -> result.add(new LoginInfo(record.get(LOGIN_HEADER), record.get(PASSWORD_HEADER))));

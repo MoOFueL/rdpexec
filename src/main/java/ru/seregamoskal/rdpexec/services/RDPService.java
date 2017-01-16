@@ -8,6 +8,7 @@ import ru.seregamoskal.rdpexec.domain.Operation;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Дмитрий on 11.01.2017.
@@ -33,26 +34,28 @@ public class RDPService {
     /**
      * Необходимо реализовать метод, принимающий на вход список {@link ServerInfo} и его же возвращающий.
      * Для каждого ServerInfo необходимо осуществить доступ по указанному в поле {@link ServerInfo#address}
-     * IP адресу по RDP через перебор пар логин-пароль, полученных из метода {@link LoginInfoService#findAll()}.
+     *      IP адресу по RDP через перебор пар логин-пароль, полученных из метода {@link LoginInfoService#findAll()}.
+     * Подключиться к серверу и выполнить нужные действия, используя метод {@link #executeOperation(Map)}
+     *      и записать результат в переменную.
      * При успешном подключении к серверу:
      * 1. Установить валидный {@link ru.seregamoskal.rdpexec.domain.LoginInfo} в объект ServerInfo,
      *      используя метод {@link ServerInfo#setLoginInfo(LoginInfo)}
-     * 2. Выполнить метод {@link #executeOperation(String, List)} и записать результат в переменную.
-     * 3. При удачном выполнении операции ({@link Operation#isWentOk()}) взять дату {@link Operation#getDate()} и
+     * 2. При удачном выполнении операции ({@link Operation#isWentOk()}) взять дату {@link Operation#getDate()} и
      *      засетить её в ServerInfo.
-     * 4. Добавить саму операцию в список операций ServerInfo {@link ServerInfo#operations}.
+     * 3. Добавить саму операцию в список операций ServerInfo {@link ServerInfo#operations}.
      */
 
-    //пиши здесь этот метод
+    // TODO: 16.01.2017 реализовать описанный выше метод здесь
 
     /**
-     * Реализовать данный метод
      *
-     * @param command   - команда для выполнения
-     * @param arguments - аргументы команды
+     *
+     * @param commandsArgumentsMap - мапа, где ключом является команда к исполнению,
+     *                            а значением - список аргументов этой команды
      * @return - {@link Operation} с данными об операции
      */
-    private Operation executeOperation(String command, List<String> arguments) {
+    private Operation executeOperation(Map<String, List<String>> commandsArgumentsMap) {
+        // TODO: 16.01.2017 реализовать данный метод
         return null;
     }
 }

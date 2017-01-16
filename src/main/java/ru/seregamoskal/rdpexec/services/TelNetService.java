@@ -27,7 +27,7 @@ public class TelNetService {
      * @param subnets - список подсетей для поиска серверов, доступных по RDP
      * @return - список IP адресов серверов, доступных по RDP
      */
-    public Set<String> findServersAvalaibleByRDPConnection(List<String> subnets) {
+    public Set<String> findServersAvailableByRDPConnection(List<String> subnets) {
 
         Assert.notEmpty(subnets, "List of subnets must not be null or empty!");
         final Set<String> result = new HashSet<>();
