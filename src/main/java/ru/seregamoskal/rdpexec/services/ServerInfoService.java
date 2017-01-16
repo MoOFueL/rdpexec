@@ -8,7 +8,8 @@ import org.springframework.util.Assert;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 import ru.seregamoskal.rdpexec.repositories.ServerInfoRepository;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Dmitriy
@@ -43,15 +44,15 @@ public class ServerInfoService {
      * Метод для приема списка подсетей, генерация объектов типа ServerInfoService и сохранения их в бд
      */
 
-    public void generateAndSaveServerInfosFromSubnets(List<String> subnets) {
-        List<ServerInfo> serverinfolist = new LinkedList<>();
+    public void generateAndSaveServerInfoFromSubnets(List<String> subnets) {
+        List<ServerInfo> serverInfolist = new LinkedList<>();
         for (String server : telNetService.findServersAvalaibleByRDPConnection(subnets)) {
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setAddress(server);
             serverInfo.setWorking(true);
-            serverinfolist.add(serverInfo);
+            serverInfolist.add(serverInfo);
         }
-        save(serverinfolist);
+        save(serverInfolist);
     }
 
     /**
