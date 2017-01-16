@@ -24,6 +24,12 @@ public class RDPService {
         this.serverInfoService = serverInfoService;
     }
 
+    @Autowired
+    public void setLoginInfoService(LoginInfoService loginInfoService) {
+        Assert.notNull(loginInfoService);
+        this.loginInfoService = loginInfoService;
+    }
+
     /**
      * Необходимо реализовать метод, принимающий на вход список {@link ServerInfo} и его же возвращающий.
      * Для каждого ServerInfo необходимо осуществить доступ по указанному в поле {@link ServerInfo#address}
