@@ -3,9 +3,9 @@ package ru.seregamoskal.rdpexec.domain;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Dmitriy
@@ -48,7 +48,7 @@ public class ServerInfo {
     @OneToMany
     @JoinColumn(name = "id")
     @OrderBy("date DESC")
-    private Set<Operation> operations;
+    private List<Operation> operations;
 
     public Long getId() {
         return id;
@@ -98,14 +98,14 @@ public class ServerInfo {
         this.dateOfLastAccess = dateOfLastAccess;
     }
 
-    public Set<Operation> getOperations() {
+    public List<Operation> getOperations() {
         if (CollectionUtils.isEmpty(operations)) {
-            operations = new HashSet<>();
+            operations = new ArrayList<>();
         }
         return operations;
     }
 
-    public void setOperations(Set<Operation> operations) {
+    public void setOperations(List<Operation> operations) {
         this.operations = operations;
     }
 
