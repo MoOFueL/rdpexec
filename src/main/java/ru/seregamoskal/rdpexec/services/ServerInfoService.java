@@ -31,28 +31,27 @@ public class ServerInfoService {
         this.telNetService = telNetService;
     }
 
-    public Page<ServerInfo> findAll(Pageable pageable)
-    {
+    public Page<ServerInfo> findAll(Pageable pageable) {
         return serverInfoRepository.findAll(pageable);
     }
 
-    public List<ServerInfo> findByName(String serverName)
-    {
+    public List<ServerInfo> findByName(String serverName) {
         return serverInfoRepository.findByName(serverName);
     }
-    /**Метод для приема списка подсетей, генерация объектов типа ServerInfoService и сохранения их в бд */
 
-    public void generateAndSaveServerInfosFromSubnets(List<String> subnets)
-    {
+    /**
+     * Метод для приема списка подсетей, генерация объектов типа ServerInfoService и сохранения их в бд
+     */
+
+    public void generateAndSaveServerInfosFromSubnets(List<String> subnets) {
         List<ServerInfo> serverinfolist = new LinkedList<>();
-        for (String server: telNetService.findServersAvalaibleByRDPConnection(subnets))
-        {
+        for (String server : telNetService.findServersAvalaibleByRDPConnection(subnets)) {
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setAddress(server);
             serverInfo.setWorking(true);
             serverinfolist.add(serverInfo);
         }
-       save(serverinfolist);
+        save(serverinfolist);
     }
 
     /**
