@@ -51,6 +51,7 @@ public class ServerInfoService {
             serverInfo.setAddress(server);
             serverInfo.setWorking(true);
             serverInfoList.add(serverInfo);
+
         }
         save(serverInfoList);
     }
