@@ -1,4 +1,4 @@
-package ru.seregamoskal.rdpExec.domain;
+package ru.seregamoskal.rdpexec.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

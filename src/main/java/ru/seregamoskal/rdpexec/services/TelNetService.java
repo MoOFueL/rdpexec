@@ -1,4 +1,4 @@
-package ru.seregamoskal.rdpExec.services;
+package ru.seregamoskal.rdpexec.services;
 
 import org.apache.commons.net.util.SubnetUtils;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class TelNetService {
     private static final int PORT = 3389;
     private static final Logger LOGGER = LoggerFactory.getLogger(TelNetService.class);
     private static final Map<String, Date> workingServersIpCache = new HashMap<>();
-    private static final long CACHE_TIME_OF_LIFE = 60 * 60 * 1000;
+    private static final long CACHE_TIME_OF_LIFE = 60 * 60 * 1000L;
 
     /**
      * Метод ищет все доступные IP адреса серверов, доступных по RDP, из переданных подсетей

@@ -1,4 +1,4 @@
-package ru.seregamoskal.rdpExec.controllers;
+package ru.seregamoskal.rdpexec.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,8 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.seregamoskal.rdpExec.domain.LoginInfo;
-import ru.seregamoskal.rdpExec.services.LoginInfoService;
+import ru.seregamoskal.rdpexec.domain.LoginInfo;
+import ru.seregamoskal.rdpexec.services.LoginInfoService;
 
 import java.io.IOException;
 

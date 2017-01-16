@@ -1,12 +1,12 @@
-package ru.seregamoskal.rdpExec.services;
+package ru.seregamoskal.rdpexec.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import ru.seregamoskal.rdpExec.domain.Operation;
-import ru.seregamoskal.rdpExec.repositories.OperationRepository;
+import ru.seregamoskal.rdpexec.domain.Operation;
+import ru.seregamoskal.rdpexec.repositories.OperationRepository;
 
 /**
  * Created by Дмитрий on 10.01.2017.

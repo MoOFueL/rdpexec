@@ -1,4 +1,4 @@
-package ru.seregamoskal.rdpExec.services;
+package ru.seregamoskal.rdpexec.services;
 
 import org.springframework.stereotype.Service;
 
