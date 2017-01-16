@@ -17,11 +17,18 @@ import java.util.List;
 public class ServerInfoService {
 
     private ServerInfoRepository serverInfoRepository;
+    private TelNetService telNetService;
 
     @Autowired
     public void setServerInfoRepository(ServerInfoRepository serverInfoRepository) {
         Assert.notNull(serverInfoRepository);
         this.serverInfoRepository = serverInfoRepository;
+    }
+
+    @Autowired
+    public void setTelNetService(TelNetService telNetService) {
+        Assert.notNull(telNetService);
+        this.telNetService = telNetService;
     }
 
     public Page<ServerInfo> findAll(Pageable pageable) {
