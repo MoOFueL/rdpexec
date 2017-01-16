@@ -45,14 +45,14 @@ public class ServerInfoService {
      */
 
     public void generateAndSaveServerInfoFromSubnets(List<String> subnets) {
-        List<ServerInfo> serverInfolist = new LinkedList<>();
+        List<ServerInfo> serverInfoList = new LinkedList<>();
         for (String server : telNetService.findServersAvalaibleByRDPConnection(subnets)) {
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setAddress(server);
             serverInfo.setWorking(true);
-            serverInfolist.add(serverInfo);
+            serverInfoList.add(serverInfo);
         }
-        save(serverInfolist);
+        save(serverInfoList);
     }
 
     /**
