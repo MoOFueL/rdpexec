@@ -43,4 +43,8 @@ public class LoginInfoService {
     public Page<LoginInfo> findAll(Pageable pageable) {
         return loginInfoRepository.findAll(pageable);
     }
+
+    public List<LoginInfo> findAll() {
+        return loginInfoRepository.findAll();
+    }
 }

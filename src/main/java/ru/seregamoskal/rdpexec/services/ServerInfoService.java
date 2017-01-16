@@ -41,6 +41,15 @@ public class ServerInfoService {
     }
 
     /**
+     * Метод ищет в БД все объекты {@link ServerInfo} у которых заполнено поле адрес и поле working выставлено в true
+     *
+     * @return список объектов {@link ServerInfo}
+     */
+    public List<ServerInfo> findByAddressIsNotNullAndWorkingIsTrue() {
+        return serverInfoRepository.findByAddressIsNotNullAndWorkingIsTrue();
+    }
+
+    /**
      * Метод для приема списка подсетей, генерация объектов типа ServerInfoService и сохранения их в бд
      */
 

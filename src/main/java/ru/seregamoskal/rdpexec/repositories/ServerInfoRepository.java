@@ -13,4 +13,6 @@ public interface ServerInfoRepository extends AbstractRepository<ServerInfo>{
     List<ServerInfo> findByName(String serverName);
 
     List<ServerInfo> findByLoginInfoIsNotNull();
+
+    List<ServerInfo> findByAddressIsNotNullAndWorkingIsTrue();
 }
