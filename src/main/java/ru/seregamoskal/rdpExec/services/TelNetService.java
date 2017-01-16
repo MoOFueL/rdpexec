@@ -19,7 +19,7 @@ public class TelNetService {
     private static final int PORT = 3389;
     private static final Logger LOGGER = LoggerFactory.getLogger(TelNetService.class);
     private static final Map<String, Date> workingServersIpCache = new HashMap<>();
-    private static final long cacheTimeOfLife = 60 * 60 * 1000;
+    private static final long CACHE_TIME_OF_LIFE = 60 * 60 * 1000;
 
     /**
      * Метод ищет все доступные IP адреса серверов, доступных по RDP, из переданных подсетей
@@ -62,7 +62,7 @@ public class TelNetService {
     }
 
     private boolean checkTimeOfLife(Date date) {
-        return new Date().getTime() - date.getTime() < cacheTimeOfLife;
+        return new Date().getTime() - date.getTime() < CACHE_TIME_OF_LIFE;
     }
 
     /**
