@@ -44,17 +44,17 @@ public class TelNetService {
                     result.add(ipAddress);
                 } else {
                     workingServersIpCache.remove(ipAddress);
-                    availableBySocket(result, ipAddress);
+                    checkAvailability(result, ipAddress);
                 }
             } else {
-                availableBySocket(result, ipAddress);
+                checkAvailability(result, ipAddress);
             }
         }
         LOGGER.info("Internet address poll finished");
         return result;
     }
 
-    private void availableBySocket(final Set<String> result, final String ipAddress) {
+    private void checkAvailability(final Set<String> result, final String ipAddress) {
         if (availableBySocket(ipAddress, PORT)) {
             workingServersIpCache.put(ipAddress, new Date());
             result.add(ipAddress);
