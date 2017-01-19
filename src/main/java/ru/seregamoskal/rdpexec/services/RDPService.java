@@ -91,24 +91,20 @@ public class RDPService {
         final Charset cp866 = Charset.forName("CP866"); //у нас же винда :(
         final String operationResult = StreamUtils.copyToString(process.getInputStream(), cp866);
         final String operationErrors = StreamUtils.copyToString(process.getErrorStream(), cp866);
-        final boolean wentOk = isWentOk(operationErrors);
-
-        if (wentOk) {
-            result.setDate(new Date());
-            result.setResult(operationResult);
-            result.setText(command);
-            result.setWentOk(true);
-            result.setText(command);
-        } else {
-            result.setDate(new Date());
-            result.setText(command);
-            result.setWentOk(false);
-            result.setErrors(operationErrors);
-            result.setResult(operationResult);
-        }
-
+        result.setDate(new Date());
+        result.setText(command);
+        result.setResult(operationResult);
         final int exitValue = process.waitFor();
         result.setExitValue(exitValue);
+
+        final boolean wentOk = isWentOk(operationErrors);
+        if (wentOk) {
+            result.setWentOk(true);
+        } else {
+            result.setWentOk(false);
+            result.setErrors(operationErrors);
+        }
+
         return result;
     }
 
