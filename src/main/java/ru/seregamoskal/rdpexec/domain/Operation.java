@@ -27,6 +27,10 @@ public class Operation {
      */
     private String result;
 
+    private String errors;
+
+    private int exitValue;
+
     /**
      * Дата выполнения команды
      */
@@ -78,12 +82,30 @@ public class Operation {
         this.wentOk = wentOk;
     }
 
+    public String getErrors() {
+        return errors;
+    }
+
+    public void setErrors(String errors) {
+        this.errors = errors;
+    }
+
+    public int getExitValue() {
+        return exitValue;
+    }
+
+    public void setExitValue(int exitValue) {
+        this.exitValue = exitValue;
+    }
+
     @Override
     public String toString() {
         return "Operation{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", result='" + result + '\'' +
+                ", errors='" + errors + '\'' +
+                ", exitValue=" + exitValue +
                 ", date=" + date +
                 ", wentOk=" + wentOk +
                 '}';
