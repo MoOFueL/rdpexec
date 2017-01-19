@@ -1,5 +1,7 @@
 package ru.seregamoskal.rdpexec.services;
 
+import org.apache.catalina.Server;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -7,6 +9,7 @@ import ru.seregamoskal.rdpexec.domain.LoginInfo;
 import ru.seregamoskal.rdpexec.domain.Operation;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +49,17 @@ public class RDPService {
      */
 
     // TODO: 16.01.2017 реализовать описанный выше метод здесь
+        public List<ServerInfo> TestConnection(List<ServerInfo> ServerList)
+        {
+            Map<String, List<String>> IpPlusLogoPas = new HashMap();
+            for (ServerInfo Server: ServerList)
+            {
+                loginInfoService.findAll();
+                Server.getAddress();
+            }
+
+            executeOperation(IpPlusLogoPas);
+        }
 
     /**
      *
