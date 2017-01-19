@@ -1,15 +1,14 @@
 package ru.seregamoskal.rdpexec.services;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.StreamUtils;
 import ru.seregamoskal.rdpexec.domain.LoginInfo;
 import ru.seregamoskal.rdpexec.domain.Operation;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -78,29 +77,30 @@ public class RDPService {
     }
 
     private Operation makeResult(String command, Process process) throws IOException, InterruptedException {
+
         final Operation result = new Operation();
-        final StringWriter resultWriter = new StringWriter();
-        final StringWriter errorsWriter = new StringWriter();
         final boolean wentOk = isWentOk(process);
+
         if (wentOk) {
-            IOUtils.copy(process.getInputStream(), resultWriter, UTF_8.name());
+            final String operationResult = StreamUtils.copyToString(process.getInputStream(), UTF_8);
             result.setDate(new Date());
-            final String operationResult = resultWriter.toString();
             result.setResult(operationResult);
             result.setText(command);
             result.setWentOk(true);
             result.setText(command);
         } else {
-            IOUtils.copy(process.getErrorStream(), errorsWriter, UTF_8.name());
-            IOUtils.copy(process.getInputStream(), resultWriter, UTF_8.name());
+            final String resultString = StreamUtils.copyToString(process.getInputStream(), UTF_8);
+            final String errorsString = StreamUtils.copyToString(process.getErrorStream(), UTF_8);
             result.setDate(new Date());
             result.setText(command);
             result.setWentOk(false);
-            result.setErrors(errorsWriter.toString());
-            result.setResult(resultWriter.toString());
+            result.setErrors(errorsString);
+            result.setResult(resultString);
         }
+
         final int exitValue = process.waitFor();
         result.setExitValue(exitValue);
+
         return result;
     }
 
