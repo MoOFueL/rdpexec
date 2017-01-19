@@ -60,7 +60,7 @@ public class RDPService {
     private Operation executeOperation(Map<String, List<String>> commandsAndArgumentsMap) throws IOException, InterruptedException {
 
         final ProcessBuilder processBuilder = new ProcessBuilder();
-        List<String> commandsAndArgumentsList = transformToListOfStrings(commandsAndArgumentsMap);
+        final List<String> commandsAndArgumentsList = transformToListOfStrings(commandsAndArgumentsMap);
         processBuilder.command(commandsAndArgumentsList);
         final Process process = processBuilder.start();
         return makeResult(commandsAndArgumentsList, process);
