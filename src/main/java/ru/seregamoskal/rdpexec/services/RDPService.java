@@ -48,7 +48,7 @@ public class RDPService {
      */
 
     // TODO: 16.01.2017 реализовать описанный выше метод здесь
-    final List<ServerInfo> makeRdpCalls(List<ServerInfo> serverList) {
+    public List<ServerInfo> makeRdpCalls(List<ServerInfo> serverList) {
         final Map<String, List<String>> argumentsMap = new HashMap();
         final List<String> arguments = new LinkedList<>();
         for (ServerInfo server : serverList) {
