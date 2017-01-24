@@ -9,9 +9,8 @@ import ru.seregamoskal.rdpexec.domain.LoginInfo;
 import ru.seregamoskal.rdpexec.domain.Operation;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * Created by Дмитрий on 11.01.2017.
@@ -20,7 +19,7 @@ import java.util.Map;
 public class RDPService {
 
     private ServerInfoService serverInfoService;
-    private LoginInfoService loginInfoService;
+    private LoginInfoService loginInfo;
 
     @Autowired
     public void setServerInfoService(ServerInfoService serverInfoService) {
@@ -31,45 +30,52 @@ public class RDPService {
     @Autowired
     public void setLoginInfoService(LoginInfoService loginInfoService) {
         Assert.notNull(loginInfoService);
-        this.loginInfoService = loginInfoService;
+        this.loginInfo = loginInfoService;
     }
 
     /**
      * Необходимо реализовать метод, принимающий на вход список {@link ServerInfo} и его же возвращающий.
      * Для каждого ServerInfo необходимо осуществить доступ по указанному в поле {@link ServerInfo#address}
-     *      IP адресу по RDP через перебор пар логин-пароль, полученных из метода {@link LoginInfoService#findAll()}.
+     * IP адресу по RDP через перебор пар логин-пароль, полученных из метода {@link LoginInfoService#findAll()}.
      * Подключиться к серверу и выполнить нужные действия, используя метод {@link #executeOperation(Map)}
-     *      и записать результат в переменную.
+     * и записать результат в переменную.
      * При успешном подключении к серверу:
      * 1. Установить валидный {@link ru.seregamoskal.rdpexec.domain.LoginInfo} в объект ServerInfo,
-     *      используя метод {@link ServerInfo#setLoginInfo(LoginInfo)}
+     * используя метод {@link ServerInfo#setLoginInfo(LoginInfo)}
      * 2. При удачном выполнении операции ({@link Operation#isWentOk()}) взять дату {@link Operation#getDate()} и
-     *      засетить её в ServerInfo.
+     * засетить её в ServerInfo.
      * 3. Добавить саму операцию в список операций ServerInfo {@link ServerInfo#operations}.
      */
 
     // TODO: 16.01.2017 реализовать описанный выше метод здесь
-        public List<ServerInfo> TestConnection(List<ServerInfo> ServerList)
-        {
-            Map<String, List<String>> IpPlusLogoPas = new HashMap();
-            for (ServerInfo Server: ServerList)
-            {
-                loginInfoService.findAll();
-                Server.getAddress();
+    final List<ServerInfo> makeRdpCalls(List<ServerInfo> serverList) {
+        final Map<String, List<String>> argumentsMap = new HashMap();
+        final List<String> arguments = new LinkedList<>();
+        for (ServerInfo server : serverList) {
+            for (LoginInfo argumentList : loginInfo.findAll()) {
+                argumentsMap.put("mstsc.exe", arguments);
+                arguments.add(argumentList.getLogin());
+                arguments.add(argumentList.getPassword());
+                final Operation operation = executeOperation(argumentsMap);
+                if (operation.isWentOk()) {
+                    server.getOperations().add(operation);
+                    server.setLoginInfo(argumentList);
+                    server.setDateOfLastAccess(operation.getDate());
+                }
             }
-
-            executeOperation(IpPlusLogoPas);
         }
 
+        return serverList;
+    }
+
     /**
-     *
-     *
      * @param commandsArgumentsMap - мапа, где ключом является команда к исполнению,
-     *                            а значением - список аргументов этой команды
+     *                             а значением - список аргументов этой команды
      * @return - {@link Operation} с данными об операции
      */
     private Operation executeOperation(Map<String, List<String>> commandsArgumentsMap) {
         // TODO: 16.01.2017 реализовать данный метод
+
         return null;
     }
 }
