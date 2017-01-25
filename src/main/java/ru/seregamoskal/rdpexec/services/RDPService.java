@@ -1,7 +1,5 @@
 package ru.seregamoskal.rdpexec.services;
 
-import org.apache.catalina.Server;
-import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -9,8 +7,10 @@ import ru.seregamoskal.rdpexec.domain.LoginInfo;
 import ru.seregamoskal.rdpexec.domain.Operation;
 import ru.seregamoskal.rdpexec.domain.ServerInfo;
 
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Дмитрий on 11.01.2017.
@@ -75,6 +75,18 @@ public class RDPService {
      */
     private Operation executeOperation(Map<String, List<String>> commandsArgumentsMap) {
         // TODO: 16.01.2017 реализовать данный метод
+
+        /**
+         * Реализовать с использованием {@link ProcessBuilder}
+         * Пример использования : </br>
+         * <code>
+         *      final ProcessBuilder processBuilder = new ProcessBuilder();
+         *      final List<String> commandsAndArgumentsList = transformToListOfStrings(commandsAndArgumentsMap);
+         *      processBuilder.command(commandsAndArgumentsList);
+         *      final Process process = processBuilder.start();
+         * </code>
+         * Далее должна происходить работа с объектом процесса.
+         */
 
         return null;
     }
