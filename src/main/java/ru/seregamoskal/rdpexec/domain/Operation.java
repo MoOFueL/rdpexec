@@ -17,6 +17,17 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operation_id_seq")
     @Column(name = "id", updatable = false)
     private Long id;
+
+    /**
+     * Код вывода завершения процесса
+     */
+    private  int exitValue;
+
+    /**
+     * Получение ошибки при выполнении
+     */
+    private String errors;
+
     /**
      * Текст операции(команды)
      */
@@ -38,9 +49,7 @@ public class Operation {
      */
     private boolean wentOk;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
     public void setId(Long id) {
         this.id = id;
@@ -77,6 +86,14 @@ public class Operation {
     public void setWentOk(boolean wentOk) {
         this.wentOk = wentOk;
     }
+
+    public void setErrors(String errors) {this.errors = errors;}
+
+    public String getErrors() {return errors;}
+
+    public int getExitValue() {return getExitValue();}
+
+    public void setExitValue(int exitValue) {this.exitValue = exitValue;}
 
     @Override
     public String toString() {
