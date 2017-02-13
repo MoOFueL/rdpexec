@@ -38,47 +38,33 @@ public class RDPService {
         Assert.notNull(loginInfoService);
         this.loginInfo = loginInfoService;
     }
-
     /**
-     * Необходимо реализовать метод, принимающий на вход список {@link ServerInfo} и его же возвращающий.
-     * Для каждого ServerInfo необходимо осуществить доступ по указанному в поле {@link ServerInfo#address}
-     * IP адресу по RDP через перебор пар логин-пароль, полученных из метода {@link LoginInfoService#findAll()}.
-     * Подключиться к серверу и выполнить нужные действия, используя метод {@link #executeOperation(Map)}
-     * и записать результат в переменную.
-     * При успешном подключении к серверу:
-     * 1. Установить валидный {@link ru.seregamoskal.rdpexec.domain.LoginInfo} в объект ServerInfo,
-     * используя метод {@link ServerInfo#setLoginInfo(LoginInfo)}
-     * 2. При удачном выполнении операции ({@link Operation#isWentOk()}) взять дату {@link Operation#getDate()} и
-     * засетить её в ServerInfo.
-     * 3. Добавить саму операцию в список операций ServerInfo {@link ServerInfo#operations}.
+     * создаем метод, который принимает лист типа сервер инфо.
+     * Создаем карту, для добавления в неё данных аргументов для команды mstsc(rdp connect)
+     * Создаем лист, для добавления его в карту для метода executeOperation
+     * Создаем ссылку на объект(server) типа ServerInfo для обращения к методам класса ServerInfo
+     * Создаем ссылку на объект(argumentList) типа LoginInfo для обращения к методам класса LoginInfo, для получения данных лог/пас
+     * Добавляем в карту String(mstsc.exe) как ключ, и лист аргументов(логин+пароль)
+     * Добавляем в лист логин полученный из класса LoginInfo(из метода findALL)
+     * Добавляем в лист пароль полученный из класса LoginInfo(из метода findALL)
+     * Создаем ссылку на объект типа Operation для добавления в поле operation информацию после выполнения метода executeOperation
+     * Проверяем, сработал ли operation(isWentOK проверят, успешный ли коннект до сервера)
+     * Если да, добавляем в ServerInfo последнюю успешную операцию.
+     * Добавляем в ServerInfo корректный логин и пароль.
+     * Добавляем дату последнего успешного доступа в ServerInfo
      */
-
-    // TODO: 16.01.2017 реализовать описанный выше метод здесь
-    //создаем метод, который принимает лист типа сервер инфо.
     public List<ServerInfo> makeRdpCalls(List<ServerInfo> serverList) throws IOException {
-        //Создаем карту, для добавления в неё данных аргументов для команды mstsc(rdp connect)
         final Map<String, List<String>> argumentsMap = new HashMap();
-        //Создаем лист, для добавления его в карту для метода executeOperation
         final List<String> arguments = new LinkedList<>();
-        //Создаем ссылку на объект(server) типа ServerInfo для обращения к методам класса ServerInfo
         for (ServerInfo server : serverList) {
-            //Создаем ссылку на объект(argumentList) типа LoginInfo для обращения к методам класса LoginInfo, для получения данных лог/пас
             for (LoginInfo argumentList : loginInfo.findAll()) {
-                //Добавляем в карту String(mstsc.exe) как ключ, и лист аргументов(логин+пароль)
                 argumentsMap.put("mstsc.exe", arguments);
-                //Добавляем в лист логин полученный из класса LoginInfo(из метода findALL)
                 arguments.add(argumentList.getLogin());
-                //Добавляем в лист пароль полученный из класса LoginInfo(из метода findALL)
                 arguments.add(argumentList.getPassword());
-                //Создаем ссылку на объект типа Operation для добавления в поле operation информацию после выполнения метода executeOperation
                 final Operation operation = executeOperation(argumentsMap);
-                //Проверяем, сработал ли operation(isWentOK проверят, успешный ли коннект до сервера)
                 if (operation.isWentOk()) {
-                    //Если да, добавляем в ServerInfo последнюю успешную операцию.
                     server.getOperations().add(operation);
-                    //Добавляем в ServerInfo корректный логин и пароль.
                     server.setLoginInfo(argumentList);
-                    //Добавляем дату последнего успешного доступа в ServerInfo
                     server.setDateOfLastAccess(operation.getDate());
                 }
             }
@@ -93,19 +79,6 @@ public class RDPService {
      * @return - {@link Operation} с данными об операции
      */
     private Operation executeOperation(Map<String, List<String>> commandsArgumentsMap) throws IOException {
-        // TODO: 16.01.2017 реализовать данный метод
-
-        /**
-         * Реализовать с использованием {@link ProcessBuilder}
-         * Пример использования : </br>
-         * <code>
-         *      final ProcessBuilder processBuilder = new ProcessBuilder();
-         *      final List<String> commandsAndArgumentsList = transformToListOfStrings(commandsAndArgumentsMap);
-         *      processBuilder.command(commandsAndArgumentsList);
-         *      final Process process = processBuilder.start();
-         * </code>
-         * Далее должна происходить работа с объектом процесса.
-         */
         /**
          * Создаем объект класса типа ProcessBuilder
          * Создаем лист типа  стринг для того чтобы занести туда все значения из карты commandsArgumentsMap
